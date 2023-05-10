@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="9.5.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="9.4.000" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="read_csv" compatibility="9.0.003" expanded="true" height="68" name="Read CSV" width="90" x="45" y="85">
+        <parameter key="csv_file" value="C:\RProject\BigDataAna\ctgs.csv"/>
+        <parameter key="column_separators" value=","/>
+        <parameter key="trim_lines" value="false"/>
+        <parameter key="use_quotes" value="true"/>
+        <parameter key="quotes_character" value="&quot;"/>
+        <parameter key="escape_character" value="\"/>
+        <parameter key="skip_comments" value="false"/>
+        <parameter key="comment_characters" value="#"/>
+        <parameter key="starting_row" value="1"/>
+        <parameter key="parse_numbers" value="true"/>
+        <parameter key="decimal_character" value="."/>
+        <parameter key="grouped_digits" value="false"/>
+        <parameter key="grouping_character" value=","/>
+        <parameter key="infinity_representation" value=""/>
+        <parameter key="date_format" value=""/>
+        <parameter key="first_row_as_names" value="false"/>
+        <list key="annotations">
+          <parameter key="0" value="Name"/>
+        </list>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="encoding" value="x-windows-949"/>
+        <parameter key="read_all_values_as_polynominal" value="false"/>
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="LB.true.integer.attribute"/>
+          <parameter key="1" value="AC.true.real.attribute"/>
+          <parameter key="2" value="FM.true.real.attribute"/>
+          <parameter key="3" value="UC.true.real.attribute"/>
+          <parameter key="4" value="DL.true.real.attribute"/>
+          <parameter key="5" value="DS.true.real.attribute"/>
+          <parameter key="6" value="DP.true.real.attribute"/>
+          <parameter key="7" value="ASTV.true.integer.attribute"/>
+          <parameter key="8" value="MSTV.true.real.attribute"/>
+          <parameter key="9" value="ALTV.true.integer.attribute"/>
+          <parameter key="10" value="MLTV.true.real.attribute"/>
+          <parameter key="11" value="Width.true.integer.attribute"/>
+          <parameter key="12" value="Min.true.integer.attribute"/>
+          <parameter key="13" value="Max.true.integer.attribute"/>
+          <parameter key="14" value="Nmax.true.integer.attribute"/>
+          <parameter key="15" value="Nzeros.true.integer.attribute"/>
+          <parameter key="16" value="Mode.true.integer.attribute"/>
+          <parameter key="17" value="Mean.true.integer.attribute"/>
+          <parameter key="18" value="Median.true.integer.attribute"/>
+          <parameter key="19" value="Variance.true.integer.attribute"/>
+          <parameter key="20" value="Tendency.true.integer.attribute"/>
+          <parameter key="21" value="NSP.true.polynominal.label"/>
+        </list>
+        <parameter key="read_not_matching_values_as_missings" value="true"/>
+        <parameter key="datamanagement" value="double_array"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="split_data" compatibility="9.5.001" expanded="true" height="103" name="Split Data (2)" width="90" x="179" y="85">
+        <enumeration key="partitions">
+          <parameter key="ratio" value="0.7"/>
+          <parameter key="ratio" value="0.3"/>
+        </enumeration>
+        <parameter key="sampling_type" value="shuffled sampling"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+      </operator>
+      <operator activated="true" class="neural_net" compatibility="9.5.001" expanded="true" height="82" name="Neural Net" width="90" x="380" y="85">
+        <list key="hidden_layers">
+          <parameter key="Layer 1" value="10"/>
+          <parameter key="Layer 2" value="8"/>
+        </list>
+        <parameter key="training_cycles" value="500"/>
+        <parameter key="learning_rate" value="0.3"/>
+        <parameter key="momentum" value="0.2"/>
+        <parameter key="decay" value="false"/>
+        <parameter key="shuffle" value="true"/>
+        <parameter key="normalize" value="true"/>
+        <parameter key="error_epsilon" value="1.0E-5"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+        <description align="center" color="transparent" colored="false" width="126"/>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="9.5.001" expanded="true" height="82" name="Apply Model" width="90" x="380" y="238">
+        <list key="application_parameters"/>
+        <parameter key="create_view" value="false"/>
+        <description align="center" color="transparent" colored="false" width="126">Neural Network&lt;br&gt;&amp;#48516;&amp;#47448;&amp;#47784;&amp;#45944;&lt;br&gt;&lt;br&gt;&amp;#53468;&amp;#50500;&amp;#49900;&amp;#48149;&amp;#49688;&amp;#50752; &amp;#51076;&amp;#49328;&amp;#48512; &amp;#51088;&amp;#44417;&amp;#49688;&amp;#52629; &amp;#51221;&amp;#46020;&lt;br&gt;&amp;#51221;&amp;#49345;/&amp;#51032;&amp;#49900;/&amp;#50948;&amp;#54744;&lt;br&gt;</description>
+      </operator>
+      <operator activated="true" class="performance_classification" compatibility="9.5.001" expanded="true" height="82" name="Performance" width="90" x="581" y="187">
+        <parameter key="main_criterion" value="first"/>
+        <parameter key="accuracy" value="true"/>
+        <parameter key="classification_error" value="false"/>
+        <parameter key="kappa" value="false"/>
+        <parameter key="weighted_mean_recall" value="false"/>
+        <parameter key="weighted_mean_precision" value="false"/>
+        <parameter key="spearman_rho" value="false"/>
+        <parameter key="kendall_tau" value="false"/>
+        <parameter key="absolute_error" value="false"/>
+        <parameter key="relative_error" value="false"/>
+        <parameter key="relative_error_lenient" value="false"/>
+        <parameter key="relative_error_strict" value="false"/>
+        <parameter key="normalized_absolute_error" value="false"/>
+        <parameter key="root_mean_squared_error" value="false"/>
+        <parameter key="root_relative_squared_error" value="false"/>
+        <parameter key="squared_error" value="false"/>
+        <parameter key="correlation" value="false"/>
+        <parameter key="squared_correlation" value="false"/>
+        <parameter key="cross-entropy" value="false"/>
+        <parameter key="margin" value="false"/>
+        <parameter key="soft_margin_loss" value="false"/>
+        <parameter key="logistic_loss" value="false"/>
+        <parameter key="skip_undefined_labels" value="true"/>
+        <parameter key="use_example_weights" value="true"/>
+        <list key="class_weights"/>
+      </operator>
+      <operator activated="false" class="read_csv" compatibility="9.0.003" expanded="true" height="68" name="Read CSV (2)" width="90" x="45" y="493">
+        <parameter key="csv_file" value="C:\Users\finger_Roh\.RapidMiner\concrete.csv"/>
+        <parameter key="column_separators" value=","/>
+        <parameter key="trim_lines" value="false"/>
+        <parameter key="use_quotes" value="true"/>
+        <parameter key="quotes_character" value="&quot;"/>
+        <parameter key="escape_character" value="\"/>
+        <parameter key="skip_comments" value="false"/>
+        <parameter key="comment_characters" value="#"/>
+        <parameter key="starting_row" value="1"/>
+        <parameter key="parse_numbers" value="true"/>
+        <parameter key="decimal_character" value="."/>
+        <parameter key="grouped_digits" value="false"/>
+        <parameter key="grouping_character" value=","/>
+        <parameter key="infinity_representation" value=""/>
+        <parameter key="date_format" value=""/>
+        <parameter key="first_row_as_names" value="false"/>
+        <list key="annotations">
+          <parameter key="0" value="Name"/>
+        </list>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="encoding" value="x-windows-949"/>
+        <parameter key="read_all_values_as_polynominal" value="false"/>
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="component1.true.real.attribute"/>
+          <parameter key="1" value="component2.true.real.attribute"/>
+          <parameter key="2" value="component3.true.integer.attribute"/>
+          <parameter key="3" value="component4.true.real.attribute"/>
+          <parameter key="4" value="component5.true.real.attribute"/>
+          <parameter key="5" value="component6.true.real.attribute"/>
+          <parameter key="6" value="component7.true.real.attribute"/>
+          <parameter key="7" value="Day.true.integer.attribute"/>
+          <parameter key="8" value="Strength.true.real.label"/>
+        </list>
+        <parameter key="read_not_matching_values_as_missings" value="true"/>
+        <parameter key="datamanagement" value="double_array"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="false" class="split_data" compatibility="9.5.001" expanded="true" height="103" name="Split Data (3)" width="90" x="179" y="493">
+        <enumeration key="partitions">
+          <parameter key="ratio" value="0.7"/>
+          <parameter key="ratio" value="0.3"/>
+        </enumeration>
+        <parameter key="sampling_type" value="shuffled sampling"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+      </operator>
+      <operator activated="false" class="neural_net" compatibility="9.5.001" expanded="true" height="82" name="Neural Net (2)" width="90" x="380" y="493">
+        <list key="hidden_layers">
+          <parameter key="Layer 1" value="10"/>
+          <parameter key="Layer 2 " value="8"/>
+        </list>
+        <parameter key="training_cycles" value="500"/>
+        <parameter key="learning_rate" value="0.3"/>
+        <parameter key="momentum" value="0.2"/>
+        <parameter key="decay" value="false"/>
+        <parameter key="shuffle" value="true"/>
+        <parameter key="normalize" value="true"/>
+        <parameter key="error_epsilon" value="1.0E-5"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+        <description align="center" color="transparent" colored="false" width="126">Neural Network&lt;br&gt;&amp;#50696;&amp;#52769;&amp;#47784;&amp;#45944;&lt;br&gt;&lt;br&gt;&amp;#53080;&amp;#53356;&amp;#47532;&amp;#53944; &amp;#51116;&amp;#47308; &amp;#48708;&amp;#51473;&amp;#50640; &amp;#46384;&amp;#47480; &amp;#44053;&amp;#46020; &amp;#50696;&amp;#52769;&lt;br&gt;</description>
+      </operator>
+      <operator activated="false" class="apply_model" compatibility="9.5.001" expanded="true" height="82" name="Apply Model (2)" width="90" x="380" y="748">
+        <list key="application_parameters"/>
+        <parameter key="create_view" value="false"/>
+      </operator>
+      <operator activated="false" class="performance_regression" compatibility="9.5.001" expanded="true" height="82" name="Performance (2)" width="90" x="514" y="748">
+        <parameter key="main_criterion" value="first"/>
+        <parameter key="root_mean_squared_error" value="true"/>
+        <parameter key="absolute_error" value="true"/>
+        <parameter key="relative_error" value="true"/>
+        <parameter key="relative_error_lenient" value="false"/>
+        <parameter key="relative_error_strict" value="false"/>
+        <parameter key="normalized_absolute_error" value="false"/>
+        <parameter key="root_relative_squared_error" value="false"/>
+        <parameter key="squared_error" value="false"/>
+        <parameter key="correlation" value="true"/>
+        <parameter key="squared_correlation" value="true"/>
+        <parameter key="prediction_average" value="false"/>
+        <parameter key="spearman_rho" value="false"/>
+        <parameter key="kendall_tau" value="false"/>
+        <parameter key="skip_undefined_labels" value="true"/>
+        <parameter key="use_example_weights" value="true"/>
+      </operator>
+      <connect from_op="Read CSV" from_port="output" to_op="Split Data (2)" to_port="example set"/>
+      <connect from_op="Split Data (2)" from_port="partition 1" to_op="Neural Net" to_port="training set"/>
+      <connect from_op="Split Data (2)" from_port="partition 2" to_op="Apply Model" to_port="unlabelled data"/>
+      <connect from_op="Neural Net" from_port="model" to_op="Apply Model" to_port="model"/>
+      <connect from_op="Apply Model" from_port="labelled data" to_op="Performance" to_port="labelled data"/>
+      <connect from_op="Apply Model" from_port="model" to_port="result 3"/>
+      <connect from_op="Performance" from_port="performance" to_port="result 1"/>
+      <connect from_op="Performance" from_port="example set" to_port="result 2"/>
+      <connect from_op="Read CSV (2)" from_port="output" to_op="Split Data (3)" to_port="example set"/>
+      <connect from_op="Split Data (3)" from_port="partition 1" to_op="Neural Net (2)" to_port="training set"/>
+      <connect from_op="Split Data (3)" from_port="partition 2" to_op="Apply Model (2)" to_port="unlabelled data"/>
+      <connect from_op="Neural Net (2)" from_port="model" to_op="Apply Model (2)" to_port="model"/>
+      <connect from_op="Apply Model (2)" from_port="labelled data" to_op="Performance (2)" to_port="labelled data"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+      <portSpacing port="sink_result 4" spacing="0"/>
+      <description align="left" color="yellow" colored="false" height="258" resized="true" width="289" x="27" y="209">Neural Network&lt;br&gt;&lt;br&gt;&amp;lt;&amp;#54028;&amp;#46972;&amp;#48120;&amp;#53552;&amp;gt;&lt;br&gt;hidden layers - &amp;#47112;&amp;#51060;&amp;#50612; &amp;#49688; / &amp;#45432;&amp;#46300; &amp;#49688; &amp;#51648;&amp;#51221;&lt;br&gt;training cycle&lt;br&gt;learning rate&lt;br&gt;momentum&lt;br&gt;decay - &amp;#52404;&amp;#53356; &amp;#49884; learning rate &amp;#51216;&amp;#51216; &amp;#44048;&amp;#49548;&lt;br&gt;shuffle&lt;br&gt;normalize&lt;br&gt;error epsilon &amp;#53944;&amp;#47112;&amp;#51060;&amp;#45789; &amp;#50640;&amp;#47084;&amp;#44032; &amp;#51648;&amp;#51221;&amp;#44050; &amp;#51060;&amp;#54616;&amp;#47732; &amp;#53944;&amp;#47112;&amp;#51060;&amp;#45789;&amp;#51012; &amp;#47688;&amp;#52644;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>
